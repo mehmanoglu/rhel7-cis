@@ -17,7 +17,7 @@ With this in the file requirements.yml:
 - src: https://github.com/mehmanoglu/rhel7-cis.git
 ```
 
-Based on [CIS RedHat Enterprise Linux 7 Benchmark v2.2.0 - 01-31-2017 ](https://community.cisecurity.org/collab/public/index.php).
+Based on [CIS RedHat Enterprise Linux 7 Benchmark v2.2.0 - 12-27-2017 ](https://community.cisecurity.org/collab/public/index.php).
 
 
 
