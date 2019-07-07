@@ -1,5 +1,5 @@
-EL7 CIS STIG
-=========
+RHEL7 CIS STIG
+==============
 
 Configure RHEL/Centos 7 machine to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant. Level 1 and 2 findings will be corrected by default.
 
