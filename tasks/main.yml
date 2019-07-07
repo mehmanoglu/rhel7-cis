@@ -840,7 +840,7 @@
       - rule_1.5.1
 
 - name: "NOTSCORED | 1.5.2 | PATCH | Ensure XD/NX support is enabled"
-  shell: dmesg|grep -E "NX|XD" | grep " active"
+  shell: set -o pipefail && dmesg|grep -E "NX|XD" | grep " active"
   changed_when: no
   when:
       - rhel7cis_rule_1_5_2 | bool
@@ -2565,7 +2565,7 @@
       - rule_4.1.11
 
 - name: "SCORED | 4.1.12 | PATCH | Ensure use of privileged commands is collected"
-  shell: for i in  $(df | grep '^/dev' | awk '{ print $NF }'); do find $i -xdev -type f -perm -4000 -o -type f -perm -2000 2>/dev/null; done
+  shell: set -o pipefail && for i in  $(df | grep '^/dev' | awk '{ print $NF }'); do find $i -xdev -type f -perm -4000 -o -type f -perm -2000 2>/dev/null; done
   register: priv_procs
   changed_when: no
   check_mode: no
@@ -3157,7 +3157,7 @@
         notify:
             - restart sshd
         when:
-            - "rhel7cis_sshd['allowusers']|default('') != ''"
+            - rhel7cis_sshd['allowusers']|default('')
 
       - name: "SCORED | 5.2.14 | PATCH | Ensure SSH access is limited - allowgroups"
         lineinfile:
@@ -3168,7 +3168,7 @@
         notify:
             - restart sshd
         when:
-            - "rhel7cis_sshd['allowgroups']|default('') != ''"
+            - rhel7cis_sshd['allowgroups']|default('')
 
       - name: "SCORED | 5.2.14 | PATCH | Ensure SSH access is limited - denyusers"
         lineinfile:
@@ -3179,7 +3179,7 @@
         notify:
             - restart sshd
         when:
-            - "rhel7cis_sshd['denyusers']|default('') != ''"
+            - rhel7cis_sshd['denyusers']|default('')
 
       - name: "SCORED | 5.2.14 | PATCH | Ensure SSH access is limited - denygroups"
         lineinfile:
@@ -3190,7 +3190,7 @@
         notify:
             - restart sshd
         when:
-            - "rhel7cis_sshd['denygroups']|default('') != ''"
+            - rhel7cis_sshd['denygroups']|default('')
   when:
       - rhel7cis_rule_5_2_14 | bool
   tags:
@@ -3773,7 +3773,7 @@
       - rule_6.1.9
 
 - name: "SCORED | 6.1.10 | PATCH | Ensure no world writable files exist"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type f -perm -0002
+  shell: set -o pipefail && df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type f -perm -0002
   register: world_writable_file
   changed_when: no
   when:
@@ -3802,7 +3802,7 @@
       - rule_6.1.10
 
 - name: "SCORED | 6.1.11 | PATCH | Ensure no unowned files or directories exist"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser
+  shell: set -o pipefail && df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser
   register: orphan_files
   changed_when: no
   when:
@@ -3829,7 +3829,7 @@
       - rule_6.1.11
 
 - name: "SCORED | 6.1.12 | PATCH | Ensure no ungrouped files or directories exist"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nogroup
+  shell: set -o pipefail && df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nogroup
   register: orphan_dirs
   changed_when: no
   when:
@@ -3895,7 +3895,7 @@
       - rule_6.2.1
 
 - name: "SCORED | 6.2.2 | PATCH | Ensure no legacy '+' entries exist in /etc/passwd"
-  command: sed -i '/^+/ d' /etc/passwd
+  shell: sed -i '/^+/ d' /etc/passwd
   changed_when: no
   failed_when: no
   when:
@@ -3907,7 +3907,7 @@
       - rule_6.2.2
 
 - name: "SCORED | 6.2.3 | PATCH | Ensure no legacy '+' entries exist in /etc/shadow"
-  command: sed -i '/^+/ d' /etc/shadow
+  shell: sed -i '/^+/ d' /etc/shadow
   changed_when: no
   failed_when: no
   when:
@@ -3919,7 +3919,7 @@
       - rule_6.2.3
 
 - name: "SCORED | 6.2.4 | PATCH | Ensure no legacy '+' entries exist in /etc/group"
-  command: sed -i '/^+/ d' /etc/group
+  shell: sed -i '/^+/ d' /etc/group
   changed_when: no
   failed_when: no
   when:
