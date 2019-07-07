@@ -3308,9 +3308,9 @@ UPDATE auth pam_faillock preauth unlock_time before pam_unix.so"
     type: auth
     control: 'required'
     module_path: pam_faillock.so
-    module_arguments: >
-    preauth audit silent deny={{ var_accounts_passwords_pam_faillock_deny }} 
-    unlock_time={{ var_accounts_passwords_pam_faillock_unlock_time }}
+    module_arguments: > 
+                      preauth audit silent deny={{ var_accounts_passwords_pam_faillock_deny }} 
+                      unlock_time={{ var_accounts_passwords_pam_faillock_unlock_time }} 
     state: updated
   loop:
   - system-auth
