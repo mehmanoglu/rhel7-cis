@@ -308,7 +308,7 @@
       - rule_1.1.3
       - rule_1.1.4
       - rule_1.1.5
-      
+
 - name: "SCORED | 1.1.6 | PATCH | Ensure separate partition exists for /var"
   shell: mount | grep "on /var "
   register: var_mounted
@@ -447,7 +447,7 @@
   tags:
       - c2s
       - patch
-      
+
 - name: "SCORED | C2S | PATCH | Ensure nodev option set on /var/log/audit partition"
   mount:
     name: "/var/log/audit"
@@ -462,7 +462,7 @@
   tags:
       - c2s
       - patch
- 
+
 - name: "SCORED | C2S | PATCH | Ensure nodev option set on /boot partition"
   mount:
     name: "/boot"
@@ -536,10 +536,12 @@
       - rule_1.1.20
 
 - name: "SCORED | 1.1.21 | PATCH | Ensure sticky bit is set on all world-writable directories"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+  shell: 'set -o pipefail df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t'
+  args:
+    warn: false
+    executable: /bin/bash
   changed_when: no
   failed_when: no
-  #when: sticky_bit_on_worldwritable_dirs_audit.rc == '0'
   when:
       - rhel7cis_rule_1_1_21 | bool
   tags:
