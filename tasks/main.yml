@@ -230,8 +230,7 @@
       - rule_1.1.1.8
       - vfat
 
-- name: "SCORED | 1.1.2 | PATCH | Ensure separate partition exists for /tmp\n 
-        get back mount information associated to mountpoint"
+- name: "SCORED | 1.1.2 | PATCH | Ensure separate partition exists for /tmp get back mount information associated to mountpoint"
   command: findmnt --fstab '/tmp'
   register: tmp_device_name
   failed_when: tmp_device_name.rc > 1
