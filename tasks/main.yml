@@ -3285,8 +3285,8 @@ ADD auth pam_faillock preauth unlock_time before pam_unix.so"
     new_control: required
     new_module_path: pam_faillock.so
     module_arguments: > 
-    preauth audit silent deny={{ var_accounts_passwords_pam_faillock_deny }} 
-    unlock_time={{ var_accounts_passwords_pam_faillock_unlock_time }}
+                      preauth audit silent deny={{ var_accounts_passwords_pam_faillock_deny }} 
+                      unlock_time={{ var_accounts_passwords_pam_faillock_unlock_time }} 
     state: before
   loop:
   - system-auth
