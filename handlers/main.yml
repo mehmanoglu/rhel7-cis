@@ -80,7 +80,7 @@
     - not rhel7cis_skip_for_travis
   tags:
     - skip_ansible_lint
-    
+
 - name: start aide check
   become: yes
   command: aide --check
