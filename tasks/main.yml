@@ -3818,7 +3818,7 @@
     path: '{{ item }}'
     mode: o-w
   with_items:
-      -  '{{ world_writable_file.stdout_lines }}'
+      - '{{ world_writable_file.stdout_lines }}'
   when:
       - rhel7cis_rule_6_1_10 | bool
       - world_writable_file.stdout is defined 
@@ -3846,7 +3846,7 @@
     path: '{{ item }}'
     owner: root
   with_items:
-      -  '{{ orphan_files.stdout_lines }}'
+      - '{{ orphan_files.stdout_lines }}'
   when:
       - rhel7cis_rule_6_1_11 | bool
       - orphan_files.stdout is defined
@@ -3873,7 +3873,7 @@
     path: '{{ item }}'
     group: root
   with_items:
-      -  '{{ orphan_dirs.stdout_lines }}'
+      - '{{ orphan_dirs.stdout_lines }}'
   when:
       - rhel7cis_rule_6_1_12 | bool
       - orphan_dirs.stdout is defined
