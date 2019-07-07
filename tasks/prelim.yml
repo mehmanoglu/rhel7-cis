@@ -8,7 +8,7 @@
   check_mode: no
 
 - name: "PRELIM | Gather accounts with empty password fields"
-  shell: 'set -o pipefail && cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}''
+  shell: cat /etc/shadow | awk -F: '($2 == \"\" ) {j++;print $1; } END {exit j}'
   register: empty_password_accounts
   changed_when: no
   check_mode: no
