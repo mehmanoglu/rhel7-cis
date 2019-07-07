@@ -3384,7 +3384,7 @@ UPDATE auth pam_faillock preauth unlock_time before pam_unix.so"
     new_type: auth
     new_control: 'sufficient'
     new_module_path: pam_faillock.so
-    module_arguments: > 
+    module_arguments: >
     authsucc audit deny={{ var_accounts_passwords_pam_faillock_deny }} 
     unlock_time={{ var_accounts_passwords_pam_faillock_unlock_time }} 
     state: after
