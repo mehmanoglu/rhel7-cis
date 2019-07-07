@@ -536,7 +536,7 @@
       - rule_1.1.20
 
 - name: "SCORED | 1.1.21 | PATCH | Ensure sticky bit is set on all world-writable directories"
-  shell: df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+  shell: 'set -o pipefail df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t '
   args:
     warn: false
     executable: /bin/bash
@@ -555,7 +555,7 @@
       name: autofs
       enabled: no
   when:
-      - rhel7cis_allow_autofs == false and autofs_service_status.stdout == "loaded"
+      - not rhel7cis_allow_autofs and autofs_service_status.stdout == "loaded"
       - rhel7cis_rule_1_1_22 | bool
   tags:
       - level1
