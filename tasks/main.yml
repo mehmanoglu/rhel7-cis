@@ -243,7 +243,7 @@
       - rule_1.1.3
       - rule_1.1.4
       - rule_1.1.5
-      
+
 - name: "SCORED | 1.1.2 | PATCH | Ensure separate partition exists for /tmp | enable and start/restart tmp.mount"
   systemd:
       name: tmp.mount
@@ -253,7 +253,7 @@
       state: started
   when:
       - rhel7cis_rule_1_1_2 | bool
-      - tmp_device_name.stdout == ""
+      # - tmp_device_name.stdout == ""
   tags:
       - level2
       - scored
@@ -275,7 +275,7 @@
       - rhel7cis_rule_1_1_3 | bool
       - rhel7cis_rule_1_1_4 | bool
       - rhel7cis_rule_1_1_5 | bool
-      - tmp_device_name.stdout == ""
+      # - tmp_device_name.stdout == ""
   tags:
       - level1
       - scored
@@ -297,7 +297,7 @@
       - rhel7cis_rule_1_1_3 | bool
       - rhel7cis_rule_1_1_4 | bool
       - rhel7cis_rule_1_1_5 | bool
-      - tmp_device_name.stdout != ""
+      # - tmp_device_name.stdout != ""
       - item.mount == "/tmp"
   with_items: "{{ ansible_mounts }}"
   notify: set tmp mount mode
