@@ -3922,6 +3922,7 @@
   when:
       - rhel7cis_rule_6_2_2 | bool
   tags:
+      - skip_ansible_lint
       - level1
       - level2
       - patch
@@ -3937,6 +3938,7 @@
   when:
       - rhel7cis_rule_6_2_3 | bool
   tags:
+      - skip_ansible_lint
       - level1
       - level2
       - patch
@@ -3952,6 +3954,7 @@
   when:
       - rhel7cis_rule_6_2_4 | bool
   tags:
+      - skip_ansible_lint
       - level1
       - level2
       - patch
