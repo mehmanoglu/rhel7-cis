@@ -1,4 +1,4 @@
 ---
 - hosts: localhost
   roles:
-    - role: mehmanoglu.rhel7-cis
+    - role: mehmanoglu.rhel7_cis
