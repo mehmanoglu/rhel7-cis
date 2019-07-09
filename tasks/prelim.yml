@@ -12,6 +12,8 @@
   register: empty_password_accounts
   changed_when: no
   check_mode: no
+  tags:
+      - skip_ansible_lint
 
 - name: "PRELIM | Gather UID 0 accounts other than root"
   shell: set -o pipefail && cat /etc/passwd | awk -F ':' '($3 == 0) { print $1 }' | grep -v '^root$'
