@@ -746,7 +746,6 @@
       path: /boot/grub2/user.cfg
   register: grub_user
   when:
-      - grub_cfg.stat.exists | bool
       - rhel7cis_rule_1_4_1 | bool
   tags:
       - level1
@@ -757,15 +756,13 @@
 
 - name: "SCORED | 1.4.1 | PATCH | Ensure permissions on bootloader config are configured"
   file:
-      path: '{{ item }}'
+      path: /boot/grub2/grub.cfg
       owner: root
       group: root
       mode: 0600
-  loop:
-    - /boot/grub2/user.cfg
-    - /boot/grub2/grub.cfg
   when:
       - rhel7cis_rule_1_4_1 | bool
+      - grub_cfg.stat.exists | bool
   tags:
       - level1
       - scored
@@ -773,7 +770,21 @@
       - patch
       - rule_1.4.1
 
-
+- name: "SCORED | 1.4.1 | PATCH | Ensure permissions on bootloader config are configured"
+  file:
+      path: /boot/grub2/user.cfg
+      owner: root
+      group: root
+      mode: 0600
+  when:
+      - rhel7cis_rule_1_4_1 | bool
+      - grub_user.stat.exists | bool
+  tags:
+      - level1
+      - scored
+      - grub
+      - patch
+      - rule_1.4.1
 
 - name: "NOTSCORED | 1.4.3 | PATCH | Ensure authentication required for single user mode"
   block:
